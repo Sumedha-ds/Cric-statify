@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cricket Score Analyzer</title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        function updateForm() {
+            var numPlayers = document.getElementById("num_players").value;
+            var container = document.getElementById("player-inputs");
+            container.innerHTML = '';
+            for (var i = 0; i < numPlayers; i++) {
+                container.innerHTML += `
+                    <fieldset>
+                        <legend>Player ${i + 1}</legend>
+                        <label for="name_${i}">Name:</label>
+                        <input type="text" id="name_${i}" name="name_${i}" required>
+                        <label for="balls_faced_${i}">Balls Faced:</label>
+                        <input type="number" id="balls_faced_${i}" name="balls_faced_${i}" required>
+                        <label for="runs_scored_${i}">Runs Scored:</label>
+                        <input type="number" id="runs_scored_${i}" name="runs_scored_${i}" required>
+                        <label for="wickets_taken_${i}">Wickets Taken:</label>
+                        <input type="number" id="wickets_taken_${i}" name="wickets_taken_${i}" required>
+                        <label for="overs_bowled_${i}">Overs Bowled:</label>
+                        <input type="number" step="0.1" id="overs_bowled_${i}" name="overs_bowled_${i}" required>
+                    </fieldset>
+                `;
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>Cricket Score Analyzer</h1>
+<form action="/calculate" method="post">
+    <label for="num_players">Number of Players:</label>
+    <input type="number" id="num_players" name="num_players" required oninput="updateForm()">
+    <div id="player-inputs"></div>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
